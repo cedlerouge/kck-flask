@@ -42,9 +42,9 @@ services:
     networks:
       - keycloak-network
     volumes:
-      - ./disable-theme-cache.cli:/opt/jboss/startup-script/disable-theme-cache.cli
-      - ./themes/tailwind-example:/opt/jboss/keycloak/themes/tailwind-example
-      - ./export_kck/integration-export-user.json:/tmp/integration-export.json
+      - ./data/disable-theme-cache.cli:/opt/jboss/startup-script/disable-theme-cache.cli
+      - ./data/themes/tailwind-example:/opt/jboss/keycloak/themes/tailwind-example
+      - ./data/export_kck/integration-export-user.json:/tmp/integration-export.json
 
   oauthoidc-client:
     container_name: oauthoidc-client
