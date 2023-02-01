@@ -1,0 +1,31 @@
+{
+
+    "web": {
+        "client_id": "simple_flask_endpoint",
+        "client_secret": "9596e83a-db80-40cf-9b2f-9f6e6e20e9bf",
+        "auth_uri": "http://172.16.24.111:8181/auth/realms/integration/protocol/openid-connect/auth",
+        "token_uri": "http://172.16.24.111:8181/auth/realms/integration/protocol/openid-connect/token",
+        "userinfo_uri": "http://172.16.24.111:8181/auth/realms/integration/protocol/openid-connect/userinfo",
+        "issuer": "http://172.16.24.111:8181/auth/realms/integration",
+        "redirect_uris": [
+            "http://localhost:9191/oidc_callback*",
+            "http://localhost:9191/private",
+            "http://localhost:9191/api"
+        ]
+    },
+    "issuer": "http://localhost:8181/auth/realms/integration",
+    "auth_uri": "http://localhost:8181/auth/",
+    "redirect_uri": "http://localhost:9191/*",
+    "userinfo_uri": "http://localhost:8181/auth/realms/integration/protocol/openid-connect/userinfo",
+    "token_endpoint": "http://localhost:8181/auth/realms/integration/protocol/openid-connect/token",
+    "tokent_introspection_endpoint": "http://localhost:8181/auth/realms/integration/protocol/openid-connect/toekn/introspect",
+    "end_session_endpoint": "http://localhost:8181/auth/realms/integration/protocol/openid-connect/logout",
+    "realm_name": "integration",
+    "client_id": "simple_flask_endpoint",
+    "client_secret": "9596e83a-db80-40cf-9b2f-9f6e6e20e9bf",
+    "scope": "openid",
+    "username": "jdoe",
+    "password": "p@ssw0rd",
+    "debug": true
+
+}

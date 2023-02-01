@@ -1,0 +1,16 @@
+# python 
+.venv
+__pycache__
+**/*.pyc
+
+# vim 
+**/*.swp
+
+# git
+.git
+.gitignore 
+
+# vscode 
+
+
+

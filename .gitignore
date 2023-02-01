@@ -1,0 +1,10 @@
+# python 
+.venv
+__pycache__
+**/*.pyc
+
+# vim 
+**/*.swp
+
+# vscode 
+.vscode

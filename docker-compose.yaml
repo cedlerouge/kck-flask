@@ -1,0 +1,67 @@
+version: '3.5'
+services:
+  pg-kck-flask:
+    container_name: pg-kck-flask
+    hostname: pg-kck-flask
+    restart: always
+    image: postgres:13.1-alpine
+    environment:
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+      - POSTGRES_DB=keycloak
+    ports:
+      - 5402:5432
+    volumes:
+      - pg-data:/var/lib/postgresql:rw
+    networks:
+      - keycloak-network
+
+  kck-1:
+    container_name: kck-1
+    hostname: kck-1
+    restart: always
+    image: jboss/keycloak
+    links:         
+      - pg-kck-flask
+    environment: 
+      - TZ=Pacific/Noumea
+      - DB_VENDOR=postgres
+      - DB_ADDR=pg-kck-flask
+      - DB_PORT=5432
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=password
+      - KEYCLOAK_IMPORT=/tmp/integration-export.json
+      - KEYCLOAK_LOGLEVEL=INFO
+      - ROOT_LOGLEVEL=INFO
+    command: "-Dkeycloak.profile.feature.upload_scripts=enabled"
+    ports: 
+      - 8181:8080
+    networks:
+      - keycloak-network
+    volumes:
+      - ./disable-theme-cache.cli:/opt/jboss/startup-script/disable-theme-cache.cli
+      - ./themes/tailwind-example:/opt/jboss/keycloak/themes/tailwind-example
+      - ./export_kck/integration-export-user.json:/tmp/integration-export.json
+
+  oauthoidc-client:
+    container_name: oauthoidc-client
+    hostname: oauthoidc-client
+    image: oauthoidc-client:latest
+    build:
+      context: oauthoidc_client
+      dockerfile: Dockerfile
+    depends_on:
+      - kck-1
+    ports:
+      - 9191:9191
+    volumes:
+      - ./oauthoidc_client/settings.json:/app/settings.json
+
+networks:
+  keycloak-network:
+
+volumes:
+  pg-data:
